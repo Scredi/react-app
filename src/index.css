@@ -59,6 +59,11 @@ body {
   margin: 1%;
 }
 
+.list-item img {
+  display: block;
+  width: 100%;
+}
+
 .list-item.liked {
   border: 1px solid red;
 }
