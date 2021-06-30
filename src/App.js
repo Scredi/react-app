@@ -6,6 +6,7 @@ import Loader from './components/Loader';
 const App = () => {
   const [data, setData] = useState([])
   , [isLoading, setLoading] = useState(true)
+  , [filteredData, setFilteredData] = useState([])
   , [searchTerm, setSearchTerm] = useState('');
 
   const handleInputChange = (value) => {
@@ -42,6 +43,10 @@ const App = () => {
     getData();
   }, [])
 
+  useEffect(() => {
+    setFilteredData(data.filter(item => item.username.toLowerCase().includes(searchTerm.toLowerCase())))
+  }, [searchTerm])
+
   return (
     <div className="App">
       <div className="search">
@@ -54,13 +59,18 @@ const App = () => {
       { isLoading && <Loader /> }
       <div className="list-container">
         {
-          data.length > 0
-          && data.map(item => (
+          filteredData.length <= 0 ?
+          data.map(item => (
             <ListItem
               key={item.id}
               {...item}
             />
-          )) 
+          )) : filteredData.map(item => (
+            <ListItem
+              key={item.id}
+              {...item}
+            />
+          ))
         }
       </div>
     </div>

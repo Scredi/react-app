@@ -8,7 +8,7 @@ const InputSearch = ({searchTerm, handleChange}) => {
         onChange={(e) => handleChange(e.target.value)}
       />
     </>
-  )
+  );
 }
 
 export default InputSearch;
