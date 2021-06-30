@@ -7,7 +7,18 @@ const App = () => {
   const [data, setData] = useState([])
   , [isLoading, setLoading] = useState(true)
   , [filteredData, setFilteredData] = useState([])
+  , [likedUsers, setLikedUsers] = useState(JSON.parse(localStorage.getItem('likedUsers')) || [])
   , [searchTerm, setSearchTerm] = useState('');
+
+  const handleLikeUser = (id) => {
+    const exists = likedUsers.includes(id);
+
+    if (exists) {
+      setLikedUsers(likedUsers.filter(item => item !== id));
+    } else {
+      setLikedUsers([...likedUsers, id]);
+    }
+  }
 
   const handleInputChange = (value) => {
     setSearchTerm(value);
@@ -47,6 +58,10 @@ const App = () => {
     setFilteredData(data.filter(item => item.username.toLowerCase().includes(searchTerm.toLowerCase())))
   }, [searchTerm])
 
+  useEffect(() => {
+    localStorage.setItem('likedUsers', JSON.stringify(likedUsers));
+  }, [likedUsers])
+
   return (
     <div className="App">
       <div className="search">
@@ -64,11 +79,13 @@ const App = () => {
             <ListItem
               key={item.id}
               {...item}
+              likeUser={handleLikeUser}
             />
           )) : filteredData.map(item => (
             <ListItem
               key={item.id}
               {...item}
+              likeUser={handleLikeUser}
             />
           ))
         }
