@@ -52,7 +52,6 @@ body {
 .list-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .list-item {
@@ -64,12 +63,18 @@ body {
   width: 100%;
 }
 
-.list-item.liked {
-  border: 1px solid red;
-}
-
 .list-item__username {
   cursor: pointer;
+}
+
+.list-item__username span {
+  margin-right: 5px;
+}
+
+.list-item.liked,
+.list-item.liked .list-item__username:after {
+  color: red;
+  content: "\2665";
 }
 
 .search {
