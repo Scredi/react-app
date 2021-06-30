@@ -1,6 +1,7 @@
-const ListItem = ({username}) => {
+const ListItem = ({username, picture}) => {
   return (
     <div className="list-item">
+      <img alt="" src={picture}/>
       <div>{username}</div>
     </div>
   );

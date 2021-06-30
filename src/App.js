@@ -41,6 +41,7 @@ const App = () => {
           data.length > 0
           && data.map(item => (
             <ListItem
+              key={item.id}
               {...item}
             />
           )) 
