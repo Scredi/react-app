@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const ListItem = ({id, username, picture, isLiked, likeUser}) => {
   const [like, setLike] = useState(isLiked);
 
-  const handleLikeUser = (id) => {
+  const handleLikeUser = () => {
     setLike(!like);
     likeUser(id);
   }
@@ -11,7 +11,7 @@ const ListItem = ({id, username, picture, isLiked, likeUser}) => {
   return (
     <div className={like ? "list-item liked" : "list-item"}>
       <img alt="" src={picture}/>
-      <div className="list-item__username" onClick={() => handleLikeUser(id)}>
+      <div className="list-item__username" onClick={handleLikeUser}>
         {username}
       </div>
     </div>
