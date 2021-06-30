@@ -59,6 +59,10 @@ body {
   margin: 1%;
 }
 
+.list-item.liked {
+  border: 1px solid red;
+}
+
 .list-item__username {
   cursor: pointer;
 }
