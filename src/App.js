@@ -28,13 +28,21 @@ const App = () => {
     setSearchTerm('');
   }
 
-  const mapData = (array, order) => {
+  const mapDataAndOrder = (array, order, key) => {
     array.map((item) => {
       if (order.includes(item.id)) {
         item.isLiked = true;
       }
       return item;
-    })
+    });
+
+    array.sort((a, b) => {
+      if (order.indexOf(a[key]) > order.indexOf(b[key])) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
 
     return array;
   }
@@ -56,7 +64,7 @@ const App = () => {
     let json = await response.json();
 
     if (likedUsers && likedUsers.length > 0) {
-      json = mapData(json, likedUsers, 'id');
+      json = mapDataAndOrder(json, likedUsers, 'id');
     } else {
       json = json.sort((a, b) => {
         return a.id - b.id;
