@@ -5,7 +5,16 @@ import Loader from './components/Loader';
 
 const App = () => {
   const [data, setData] = useState([])
-  , [isLoading, setLoading] = useState(true);
+  , [isLoading, setLoading] = useState(true)
+  , [searchTerm, setSearchTerm] = useState('');
+
+  const handleInputChange = (value) => {
+    setSearchTerm(value);
+  }
+
+  const resetSearch = () => {
+    setSearchTerm('');
+  }
 
   const getData = async () => {
     const response = await fetch('./dummy.json',
@@ -35,6 +44,13 @@ const App = () => {
 
   return (
     <div className="App">
+      <div className="search">
+        <InputSearch
+          searchTerm={searchTerm}
+          handleChange={handleInputChange}
+        />
+        <button onClick={resetSearch}>Effacer</button>
+      </div>
       { isLoading && <Loader /> }
       <div className="list-container">
         {
