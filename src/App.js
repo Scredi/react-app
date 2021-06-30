@@ -28,6 +28,17 @@ const App = () => {
     setSearchTerm('');
   }
 
+  const mapData = (array, order) => {
+    array.map((item) => {
+      if (order.includes(item.id)) {
+        item.isLiked = true;
+      }
+      return item;
+    })
+
+    return array;
+  }
+
   const getData = async () => {
     const response = await fetch('./dummy.json',
       {
@@ -42,7 +53,11 @@ const App = () => {
       console.log(response.status);
     }
 
-    const json = await response.json();
+    let json = await response.json();
+
+    if (likedUsers && likedUsers.length > 0) {
+      json = mapData(json, likedUsers, 'id');
+    }
 
     setTimeout(() => {
       setLoading(false);

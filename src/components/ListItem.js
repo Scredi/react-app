@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const ListItem = ({id, username, picture, likeUser}) => {
-  const [like, setLike] = useState(false);
+const ListItem = ({id, username, picture, isLiked, likeUser}) => {
+  const [like, setLike] = useState(isLiked);
 
   const handleLikeUser = (id) => {
     setLike(!like);
