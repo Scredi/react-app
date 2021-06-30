@@ -57,6 +57,10 @@ const App = () => {
 
     if (likedUsers && likedUsers.length > 0) {
       json = mapData(json, likedUsers, 'id');
+    } else {
+      json = json.sort((a, b) => {
+        return a.id - b.id;
+      });
     }
 
     setTimeout(() => {
